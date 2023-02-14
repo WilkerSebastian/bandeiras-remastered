@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandeiras</title>
+
+    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bs-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+
+</head>
+
+<body class="bg-pink-light">
+
+    <header class="position-sticky top-0 border-bottom border-white border-2">
+
+        <nav class="navbar navbar-expand-custom navbar-mainbg">
+            <a class="navbar-brand navbar-logo mx-auto" href="/">Bandeiras</a>
+            <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <div class="hori-selector">
+                        <div class="left"></div>
+                        <div class="right"></div>
+                    </div>
+                    <% if (padrao) { %>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#bandeiras"><i
+                                    class="fas fa-tachometer-alt"></i>Bandeiras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#historia"><i class="fas fa-tachometer-alt"></i>História</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#curiosidade"><i
+                                    class="far fa-address-book"></i>Curiosidades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sobre"><i class="far fa-clone"></i>Sobre</a>
+                        </li>
+
+                    <% } %>
+                    
+                </ul>
+            </div>
+            <div class="mx-auto d-flex">
+
+                <a href="#" class="btn btn-success">Registro</a>
+                <a href="#" class="btn btn-dark ms-1 me-5">Login</a>
+
+            </div>
+        </nav>
+
+    </header>
+    <main class="min-vh-100 bg-light">
+
+        <%- body %>
+
+    </main>
+    <footer class="bg-pink-light mt-auto">
+
+        <p class="text-light p-5 text-center">COPYRIGHT © 2023 WILKER SEBASTIAN AFONSO PEREIRA TODOS OS DIREITOS
+            RESERVADOS.</p>
+
+    </footer>
+
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/rgb.js"></script>
+    <script src="/public/js/navbar.js"></script>
+
+</body>
+
+</html>

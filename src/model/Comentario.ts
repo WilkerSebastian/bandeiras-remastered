@@ -1,12 +1,8 @@
 import db from "../database/connection"
 
-class Usuario {
+class Comentario {
 
-    public async save(user:any) {
-        
-
-    }
 
 }
 
-export default Usuario
+export default Comentario

@@ -7,6 +7,12 @@ import ejs from "express-ejs-layouts"
 import session from "express-session"
 import router from './router';
 
+declare module 'express-session' {
+    interface SessionData {
+      username:string;
+    }
+}
+
 const PORT = process.env.PORT || 8080
 
 const production = process.env.NODE_ENV as string == "production"

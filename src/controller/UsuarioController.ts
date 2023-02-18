@@ -1,14 +1,8 @@
 import {Request, Response} from "express"
 import Usuario from "../model/Usuario"
 import db from "../database/connection"
-import aesjs from "aes-js"
-import { randomBytes } from "crypto"
-
-declare module 'express-session' {
-    interface SessionData {
-      username:string;
-    }
-}
+import Security from "../assets/Security"
+import EmailManeger from "../assets/EmailManeger"
 
 class UsuarioController {
 
@@ -20,51 +14,25 @@ class UsuarioController {
 
     public async saveUser(req:Request, res:Response) {
 
-        const user = await Usuario.create(req.body)
+        let user = await Usuario.create(req.body)
 
-        if (this.validacao(user)) {
+        if (Number((await Usuario.countByNome(req.body.nome) as any[])[0].count) <= 0) {
             
-            await Usuario.save(user)
+            user = await Usuario.save(user) as Usuario
 
-            req.session.username = this.criptografar(user.nome)
+            console.log(user)
 
-            res.redirect("/")
+            req.session.username = await Security.criptografar(req.body.nome)
+
+            const emailManeger = new EmailManeger()
+
+            emailManeger.sendEmail(req.protocol + "://" + req.get("host") + "/user/active/", {nome:req.session.username,email:user.email})
+ 
+            return res.redirect(`/email/show/${user.email}`)
 
         }
         
         return res.render("registro", {padrao:false, login:false, erro:"nome ja está sendo usado"})
-
-    }
-
-    private criptografar(conteudo:string) {
-
-        const key = Buffer.from(process.env.KEY as string) || randomBytes(32)
-
-        const iv = Buffer.from(process.env.IV as string) || randomBytes(16)
-
-        const aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(iv));
-
-        const countBytes = aesjs.utils.utf8.toBytes(conteudo)
-
-        return aesjs.utils.hex.fromBytes(aesCtr.encrypt(countBytes))
-
-    }
-
-    private validacao(user:Usuario) {
-
-        db.query(`SELECT COUNT(*) FROM Usuario WHERE nome = ${user.nome}`)
-        .then(result => {
-
-            return result.rows[0].count <= 0
-
-        })
-        .catch(err =>{
-
-            console.log(err.toString());
-
-        })
-    
-        return false
 
     }
 

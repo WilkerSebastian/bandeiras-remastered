@@ -2,15 +2,15 @@ import db from "./connection"
 import { resolve } from "path"
 import {readFileSync} from "fs"
 
-async function create() {
+function create() {
 
     try {
 
         const usuario = readFileSync(resolve("./src/database/sql/usuario.sql")).toString("utf-8")
         const comentario = readFileSync(resolve("./src/database/sql/comentario.sql")).toString("utf-8")
 
-        await db.query(usuario)
-        await db.query(comentario)
+        db.query(usuario)
+        db.query(comentario)
 
         console.log("tabelas criadas com sucesso");
         

@@ -4,7 +4,7 @@ class PagesController {
 
     public async index(req:Request, res:Response) {
 
-        return res.render("index", {padrao:true})
+        return res.render("index", {padrao:true, })
 
     }
 

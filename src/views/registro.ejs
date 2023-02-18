@@ -13,18 +13,18 @@
 
             <h1 class="text-center text-pink-light">Registro</h1>
 
-            <form action="" method="post" onsubmit="return validacao()">
+            <form action="/user/save" method="post" onsubmit="return validacao()">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control input-required" id="nome" err="o nome deve ter pelo menos 3 caracteres">
+                    <input type="text" class="form-control input-required" name="nome" id="nome" err="o nome deve ter pelo menos 3 caracteres">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control input-required" id="email" err="informe um email valido">
+                    <input type="email" class="form-control input-required" name="email" id="email" err="informe um email valido">
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control input-required" id="senha" err="a senha deve ter pelo menos 8 caracteres">
+                    <input type="password" class="form-control input-required" name="senha" id="senha" err="a senha deve ter pelo menos 8 caracteres">
                 </div>
                 <div class="mb-3">
                     <label for="confsenha" class="form-label">Confirmar senha</label>

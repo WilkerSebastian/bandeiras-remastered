@@ -2,9 +2,15 @@ import {Request, Response} from "express"
 
 class PagesController {
 
-    public index(req:Request, res:Response) {
+    public async index(req:Request, res:Response) {
 
-        res.render("index", {padrao:true})
+        return res.render("index", {padrao:true})
+
+    }
+
+    public async termo(req:Request, res:Response) {
+
+        return res.render("termo" , {padrao:false})
 
     }
 

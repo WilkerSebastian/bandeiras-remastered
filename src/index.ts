@@ -4,6 +4,7 @@ dotenv.config()
 import express, { urlencoded, json } from "express";
 import { resolve } from "path"
 import ejs from "express-ejs-layouts"
+import session from "express-session"
 import router from './router';
 
 const PORT = process.env.PORT || 8080
@@ -13,6 +14,12 @@ const production = process.env.NODE_ENV as string == "production"
 const DIR = production ? "build" : "src"
 
 const app = express();
+
+app.use(session({
+    secret: process.env.SECRET || "wilkervondeveloper",
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use(urlencoded({extended:true}))
 app.use(json())

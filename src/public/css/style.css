@@ -32,6 +32,13 @@ i {
 	color:var(--pink-light);
 
 }
+
+#alerta {
+
+	display: none;
+
+}
+
 /*----------RGB text------------*/
 
 .rgb-text {

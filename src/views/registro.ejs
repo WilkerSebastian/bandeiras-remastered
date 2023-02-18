@@ -1,0 +1,63 @@
+<section id="alerta" class="position-sticky top-0">
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <div id="erro-msg">
+        </div>
+    </div>
+</section>
+
+<section class="container w-50 mx-auto pt-3">
+    <% if (login) { %>
+
+        <% } else { %>
+
+            <h1 class="text-center text-pink-light">Registro</h1>
+
+            <form action="" method="post" onsubmit="return validacao()">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control input-required" id="nome" err="o nome deve ter pelo menos 3 caracteres">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control input-required" id="email" err="informe um email valido">
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control input-required" id="senha" err="a senha deve ter pelo menos 8 caracteres">
+                </div>
+                <div class="mb-3">
+                    <label for="confsenha" class="form-label">Confirmar senha</label>
+                    <input type="password" class="form-control" id="confsenha" err="a senha deve ser igual">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="term"
+                        err="aceite os termos e serviços para prosseguir">
+                    <label class="form-check-label" for="term">Você concorda com os</label>
+                    <a href="/termoservico">termos serviço</a>
+                </div>
+                <button type="submit" class="btn btn-primary">registrar</button>
+
+            </form>
+
+            <% } %>
+</section>
+
+<% if (erro) { %>
+
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="mr-auto">Título do Toast</strong>
+            <small>agora</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+
+            <%= erro %>
+
+        </div>
+    </div>
+
+    <% } %>

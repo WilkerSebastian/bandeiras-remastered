@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Ativo</th>
+        <th scope="col">Imagem</th>
+        <th scope="col">Deletar</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% usuarios.forEach(usuario => { %>
+         
+            <tr>
+                <th scope="row"><%= usuario.id %></th>
+                <td><%= usuario.nome %></td>
+                <td><%= usuario.email %></td>
+                <td><%= usuario.ativo %></td>
+                <td><img src="data:image/png;base64,<%= usuario.encode %>" class="rounded-circle img-perfil"></td>
+                <td><a href="/admin/delete/user/<%= admin %>/<%= usuario.id %>">
+                    
+                    <img src="/public/img/deletar.png" class="img-perfil">
+                
+                </a></td>
+            </tr>
+
+        <% }) %>
+    </tbody>
+  </table>

@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="/public/css/perfil.css">
+
+<div class="container-fluid d-table py-5">
+
+    <% if (usuario) { %>
+        <section class="d-flex justify-content-center w-100">
+            <div class="left ms-auto h-auto">
+
+                <img class="image" src="data:image/png;base64,<%= usuario.encode %>" />
+                <h3 class="username text-center">
+                    <%= usuario.nome %>
+                </h3>
+                <form action="/user/put/image/<%= seeder %>" method="post">
+
+                    <div class="image-input">
+                        <input type="file" accept="image/*" id="imageInput">
+                        <label for="imageInput" class="image-button"><i class="far fa-image"></i> Escolha a
+                            imagem</label>
+                        <img src="" class="image-preview">
+                        <span class="change-image">Escolher uma imagem diferente</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Editar foto</button>
+
+                </form>
+            </div>
+            <form class="d-flex flex-column mx-auto w-50">
+                <div class="right tab-content">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Nome</label>
+
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputName" placeholder="Nome"
+                                value="<%= usuario.nome %>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email"
+                                value="<%= usuario.email %>">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 mx-5 col-sm-10 d-flex flex-column w-25">
+                        <button type="submit" class="btn btn-success mt-3">Salvar alterações</button>
+                        <div class="d-flex">
+
+                            <a href="/user/logout/" class="mt-2 btn btn-danger">logout</a>
+                            <a href="/" class="mt-2 btn btn-dark">voltar</a>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <% } else {%>
+
+            <h1 class="text-pink-light">Usuario não encontrado</h1>
+            <a href="/">voltar</a>
+
+            <% } %>
+</div>
+
+<script src="/public/js/perfil.js"></script>

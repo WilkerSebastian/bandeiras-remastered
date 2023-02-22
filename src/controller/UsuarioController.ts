@@ -1,6 +1,5 @@
 import {Request, Response} from "express"
 import Usuario from "../model/Usuario"
-import db from "../database/connection"
 import Security from "../assets/Security"
 import EmailManeger from "../assets/EmailManeger"
 
@@ -48,6 +47,33 @@ class UsuarioController {
         }
 
     } 
+
+    public async perfil(req:Request, res:Response) {
+
+        const id = Number(await Security.decriptografar(req.params.id))
+
+        const usuario = await Usuario.listByID(id)
+
+        const user = {
+
+            nome:usuario.nome,
+            imagem:usuario.encode
+
+        }
+
+        const seeder = await Security.criptografar(usuario.nome)
+
+        return res.render("perfil", {padrao:false, user, usuario, seeder, id:req.cookies["id"]})
+
+    }
+
+    public async logout(req:Request, res:Response) {
+
+        res.clearCookie("id")
+
+        return res.redirect("/")
+
+    }
 
 }
 

@@ -62,9 +62,26 @@ class Usuario {
 
   }
 
-  public async list() {
+  public static async listByID(id:number) {
 
-    return (await db.query("SELECT * FROM Usuario")).rows
+    return (await db.query(`SELECT nome, encode(imagem, 'base64'), email FROM Usuario WHERE id = $1`, [id])).rows[0]
+
+  }
+
+  public static async delete(id:number) {
+
+    await db.query(`DELETE FROM Usuario WHERE id = $1`, [id])
+    .catch((err) => {
+
+      console.log(err.toString());
+
+    })
+
+  }
+
+  public static async listUser() {
+
+    return (await db.query("SELECT id, nome, encode(imagem, 'base64') , ativo , email FROM Usuario")).rows
 
   }
 

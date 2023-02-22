@@ -7,6 +7,8 @@ import ejs from "express-ejs-layouts"
 import router from './router';
 import cookieParser from 'cookie-parser';
 
+process.env.ADMIN = process.env.ADMIN ?? "devadmin"
+
 const PORT = parseInt(process.env.PORT as string) || 8080
 
 const production = process.env.NODE_ENV as string == "production"

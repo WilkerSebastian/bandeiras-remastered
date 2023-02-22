@@ -8,10 +8,15 @@ const router = Router();
 
 router.get("/" , PagesCoontroller.index)
 router.get("/termoservico", PagesCoontroller.termo)
+
 router.get("/user/registro", UsuarioController.registro)
-router.post("/user/save", UsuarioController.saveUser)
-router.get("/email/show/:email", EmailController.show)
 router.get("/user/active/:nome", EmailController.emailRegister)
+router.post("/user/save", UsuarioController.saveUser)
+router.get("/user/perfil/:id", UsuarioController.perfil)
+
+router.get("/email/show/:email", EmailController.show)
+
 router.get("/admin/list/user/:admin", AdminController.viewUsers)
+router.get("/admin/delete/user/:admin/:id", AdminController.deletar)
 
 export default router

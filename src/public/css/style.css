@@ -21,6 +21,12 @@ i {
 	margin-right: 10px;
 }
 
+header {
+
+	z-index: 100;
+
+}
+
 .bg-pink-light {
 
 	background-color: var(--pink-light);

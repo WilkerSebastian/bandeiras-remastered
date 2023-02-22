@@ -12,17 +12,56 @@ class EmailController {
 
         if (erro) {
 
-            return res.render("erro", {padrao:false, error: "Usuario não encontrado!"})
+            if (req.cookies["id"]) {
+                try {
+                    const id = await Security.decriptografar(req.cookies["id"]);
+                    const e = await Usuario.listNameAndImgByID(Number(id));
+                    let user = {
+                        nome: e?.nome as string,
+                        imagem: e?.encode as string,
+                    };
+                    return res.render("erro", {padrao:false, error: "Usuario não encontrado!", id:req.cookies["id"], user:user})
+                } catch (error) {
+                    console.error(error);
+                    return res.render("erro", { padrao: true, error: "Usuario não encontrado!" ,id:req.cookies["id"]});
+                }
+            }
             
         }
 
-        return res.render("emailshow", {padrao:false, result: "Conta ativada com sucesso"})
+        if (req.cookies["id"]) {
+            try {
+                const id = await Security.decriptografar(req.cookies["id"]);
+                const e = await Usuario.listNameAndImgByID(Number(id));
+                let user = {
+                    nome: e?.nome as string,
+                    imagem: e?.encode as string,
+                };
+                return res.render("emailshow", {padrao:false, result: "Conta ativada com sucesso", id:req.cookies["id"], user:user})
+            } catch (error) {
+                console.error(error);
+                return res.render("emailshow", {padrao:false, result: "Conta ativada com sucesso", id:req.cookies["id"]})
+            }
+        }
 
     }
 
     public async show(req:Request, res:Response) {
 
-        return res.render("emailshow", {padrao:false, result:`Acesse seu email ${req.params.email}, para ativar sua conta`})
+        if (req.cookies["id"]) {
+            try {
+                const id = await Security.decriptografar(req.cookies["id"]);
+                const e = await Usuario.listNameAndImgByID(Number(id));
+                let user = {
+                    nome: e?.nome as string,
+                    imagem: e?.encode as string,
+                };
+                return res.render("emailshow", {padrao:false, result: "Conta ativada com sucesso", id:req.cookies["id"], user:user})
+            } catch (error) {
+                console.error(error);
+                return res.render("emailshow", {padrao:false, result: "Conta ativada com sucesso", id:req.cookies["id"]})
+            }
+        }
 
     }
 

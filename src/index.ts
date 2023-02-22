@@ -4,16 +4,10 @@ dotenv.config()
 import express, { urlencoded, json } from "express";
 import { resolve } from "path"
 import ejs from "express-ejs-layouts"
-import session from "express-session"
 import router from './router';
+import cookieParser from 'cookie-parser';
 
-declare module 'express-session' {
-    interface SessionData {
-      username:string;
-    }
-}
-
-const PORT = process.env.PORT || 8080
+const PORT = parseInt(process.env.PORT as string) || 8080
 
 const production = process.env.NODE_ENV as string == "production"
 
@@ -21,14 +15,10 @@ const DIR = production ? "build" : "src"
 
 const app = express();
 
-app.use(session({
-    secret: process.env.SECRET || "wilkervondeveloper",
-    resave: false,
-    saveUninitialized: true
-}));
+app.use(cookieParser(process.env.SECRET || "wilkerdeveloper"));
 
 app.use(urlencoded({extended:true}))
-app.use(json())
+app.use(json()) 
 
 app.use(ejs)
 app.set('views', resolve(`./${DIR}/views`));

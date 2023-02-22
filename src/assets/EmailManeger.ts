@@ -1,6 +1,5 @@
 
 import nodemailer from "nodemailer"
-import Usuario from "../model/Usuario";
 
 export default class EmailManeger {
 

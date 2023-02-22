@@ -54,8 +54,21 @@
             </div>
             <div class="mx-auto d-flex">
 
-                <a href="/user/registro" class="btn btn-success">Registro</a>
-                <a href="#" class="btn btn-dark ms-1 me-5">Login</a>
+                <% if (id) { %>
+
+                    <div class="d-flex link w-100 px-5" href="/user/perfil/<%= id %>">
+
+                        <img src="data:image/png;base64,<%= user.imagem %>" class="rounded-circle img-perfil">
+                        <p class="text-light mx-1 mt-1"> <%= user.nome %></p>
+
+                    </div>
+                 
+                <% } else {%> 
+
+                    <a href="/user/registro" class="btn btn-success">Registro</a>
+                    <a href="#" class="btn btn-dark ms-1 me-5">Login</a>
+
+                <% } %>
 
             </div>
         </nav>
@@ -68,8 +81,13 @@
     </main>
     <footer class="bg-pink-light mt-auto">
 
-        <p class="text-light p-5 text-center">COPYRIGHT © 2023 WILKER SEBASTIAN AFONSO PEREIRA TODOS OS DIREITOS
-            RESERVADOS.</p>
+        <div class="p-5 text-center">
+
+            <p class="text-light">COPYRIGHT © 2023 WILKER SEBASTIAN AFONSO PEREIRA TODOS OS DIREITOS
+                RESERVADOS.</p>
+            <a href="/termoservico" class="nav-link text-decoration-underline text-light">Termos Serviço</a>
+
+        </div>
 
     </footer>
 
@@ -79,6 +97,7 @@
     <script src="/public/js/navbar.js"></script>
     <script src="/public/js/toast.js"></script>
     <script src="/public/js/validacao.js"></script>
+    <script src="/public/js/linkagem.js"></script>
 
 </body>
 

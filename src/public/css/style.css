@@ -39,6 +39,14 @@ i {
 
 }
 
+.img-perfil {
+
+	width: 2rem;
+	height: 2rem;
+	cursor: pointer;
+
+}
+
 /*----------RGB text------------*/
 
 .rgb-text {

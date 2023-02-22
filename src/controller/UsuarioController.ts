@@ -8,7 +8,7 @@ class UsuarioController {
 
     public async registro(req:Request, res:Response) {
 
-        return res.render("registro", {padrao:false, login:false, erro:false})
+        return res.render("registro", {padrao:false, login:false, erro:false, id:req.cookies["id"]})
 
     }
 
@@ -20,21 +20,34 @@ class UsuarioController {
             
             user = await Usuario.save(user) as Usuario
 
-            console.log(user)
-
-            req.session.username = await Security.criptografar(req.body.nome)
+            res.cookie("id" , await Security.criptografar(user.id.toString()))
 
             const emailManeger = new EmailManeger()
 
-            emailManeger.sendEmail(req.protocol + "://" + req.get("host") + "/user/active/", {nome:req.session.username,email:user.email})
+            emailManeger.sendEmail(req.protocol + "://" + req.get("host") + "/user/active/", {nome: await Security.criptografar(req.body.nome),email:user.email})
  
             return res.redirect(`/email/show/${user.email}`)
 
         }
         
-        return res.render("registro", {padrao:false, login:false, erro:"nome ja está sendo usado"})
+        if (req.cookies["id"]) {
+            try {
+                const id = await Security.decriptografar(req.cookies["id"]);
+                const e = await Usuario.listNameAndImgByID(Number(id));
+                let user = {
+                    nome: e?.nome as string,
+                    imagem: e?.encode as string,
+                };
+                return res.render("registro", {padrao:false, login:false, erro:"nome ja está sendo usado", id:req.cookies["id"], user:user})
 
-    }
+            } catch (error) {
+                console.error(error);
+                return res.render("registro", {padrao:false, login:false, erro:"nome ja está sendo usado", id:req.cookies["id"]})
+
+            }
+        }
+
+    } 
 
 }
 

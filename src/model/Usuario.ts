@@ -62,6 +62,25 @@ class Usuario {
 
   }
 
+  public static async updateImage(id:number, imagem:Buffer) {
+
+    return await db.query(`UPDATE Usuario SET imagem = $1 WHERE id = $2`,[
+      imagem,
+      id
+    ])
+
+  }
+
+  public static async updateNomeAndEmail(id:number , user:Usuario) {
+
+    return await db.query(`UPDATE Usuario SET nome = $1, email = $2 WHERE id = $3`,[
+      user.nome,
+      user.email,
+      id
+    ])
+
+  }
+
   public static async listByID(id:number) {
 
     return (await db.query(`SELECT nome, encode(imagem, 'base64'), email FROM Usuario WHERE id = $1`, [id])).rows[0]

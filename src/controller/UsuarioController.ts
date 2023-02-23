@@ -2,6 +2,8 @@ import {Request, Response} from "express"
 import Usuario from "../model/Usuario"
 import Security from "../assets/Security"
 import EmailManeger from "../assets/EmailManeger"
+import {readFileSync, unlinkSync} from "fs"
+import { resolve } from "path"
 
 class UsuarioController {
 
@@ -61,9 +63,42 @@ class UsuarioController {
 
         }
 
-        const seeder = await Security.criptografar(usuario.nome)
+        return res.render("perfil", {padrao:false, user, usuario, id:req.cookies["id"]})
 
-        return res.render("perfil", {padrao:false, user, usuario, seeder, id:req.cookies["id"]})
+    }
+
+    public async put(req:Request, res:Response) {
+
+        
+        const path = resolve(`./src/uploads/${req.params.id}.jpg`)
+ 
+        const id = Number(await Security.decriptografar(req.params.id))
+
+        let imagem = readFileSync(path)
+
+        unlinkSync(path)
+
+        await Usuario.updateImage(id, imagem)
+
+        return res.redirect("/")
+
+    }
+
+    public async update(req:Request, res:Response) {
+
+        if (Number((await Usuario.countByNome(req.body.nome) as any[])[0].count) <= 0) {
+
+            const id = Number(await Security.decriptografar(req.params.id))
+            
+            const user = await Usuario.create(req.body);
+
+            Usuario.updateNomeAndEmail(id , user)
+
+            return res.redirect("/")
+
+        }
+
+        return res.redirect("/user/perfil/" + req.params.id)
 
     }
 

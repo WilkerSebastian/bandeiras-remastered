@@ -30,7 +30,7 @@ export default class Security {
         return aesjs.utils.utf8.fromBytes(aesCtr.decrypt(cifraBytes))
 
     }
-
+ 
     public static async criptografar(conteudo:string) {
 
         let key:aesjs.ByteSource

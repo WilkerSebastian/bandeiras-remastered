@@ -9,6 +9,21 @@
 <section class="container w-50 mx-auto pt-3">
     <% if (login) { %>
 
+        <h1 class="text-center text-pink-light">Login</h1>
+
+            <form action="/user/action/login" method="post">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" required class="form-control input-required" name="email" id="email" err="informe um email valido">
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" required class="form-control input-required" name="senha" id="senha" err="a senha deve ter pelo menos 8 caracteres">
+                </div>
+                <button type="submit" class="btn btn-primary">login</button>
+
+            </form>
+
         <% } else { %>
 
             <h1 class="text-center text-pink-light">Registro</h1>

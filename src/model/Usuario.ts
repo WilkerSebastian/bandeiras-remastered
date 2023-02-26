@@ -89,7 +89,13 @@ class Usuario {
 
   public static async delete(id:number) {
 
-    await db.query(`DELETE FROM Usuario WHERE id = $1`, [id])
+    await db.query(`DELETE FROM Comentario WHERE id_user = $1`, [id])
+    .catch((err) => {
+
+      console.log(err.toString());
+
+    })
+    await db.query(`DELETE FROM Usuario WHERE id = $1;`, [id])
     .catch((err) => {
 
       console.log(err.toString());
@@ -123,6 +129,20 @@ class Usuario {
       })
 
     return result
+
+  }
+
+  public static async isUserAvaliable(user:Usuario) {
+
+    const usuarios = await db.query(`SELECT id,senha_hash FROM Usuario WHERE email = $1`, [user.email])
+
+    const user_filtro = usuarios.rows.filter(async(u) => {
+
+      return bcrypt.compare(u.senha_hash, await bcrypt.hash(user.senha, await bcrypt.genSalt(10)))
+
+    })
+
+    return user_filtro[0]
 
   }
 

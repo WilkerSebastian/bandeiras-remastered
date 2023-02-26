@@ -35,6 +35,30 @@ class UsuarioController {
 
     } 
 
+    public async login(req:Request, res:Response) {
+
+        return res.render("registro", {login:true, erro:false})
+
+    }
+
+    public async actionLogin(req:Request, res:Response) {
+
+        let user = await Usuario.create(req.body)
+
+        user = await Usuario.isUserAvaliable(user)
+
+        if (user) {
+
+            res.cookie("id", await Security.criptografar(user.id.toString()))
+
+            return res.redirect("/")
+            
+        }
+
+        return res.render("registo", {login:true, erro:"erro no email ou senha"})
+
+    }
+
     public async perfil(req:Request, res:Response) {
 
         const id = Number(await Security.decriptografar(req.params.id))

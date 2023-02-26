@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bandeiras</title>
 
     <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
@@ -33,7 +32,7 @@
                         <div class="left"></div>
                         <div class="right"></div>
                     </div>
-                    <% if (padrao) { %>
+                    <% if (navbar) { %>
                     
                         <li class="nav-item active">
                             <a class="nav-link" href="#bandeiras"><i
@@ -56,16 +55,16 @@
             </div>
             <div class="mx-auto d-flex">
 
-                <% if (id) { %>
+                <% if (user) { %>
 
                     <div class="d-flex link w-100 px-5" href="/user/perfil/<%= id %>">
 
-                        <img src="data:image/png;base64,<%= user.imagem %>" class="rounded-circle img-perfil">
+                        <img  src="data:image/png;base64,<%= user.encode %>" class="rounded-circle img-perfil">
                         <p class="text-light mx-1 mt-1"> <%= user.nome %></p>
 
                     </div>
                  
-                <% } else {%> 
+                <% } else { %> 
 
                     <a href="/user/registro" class="btn btn-success">Registro</a>
                     <a href="#" class="btn btn-dark ms-1 me-5">Login</a>
@@ -76,7 +75,7 @@
         </nav>
 
     </header>
-    <main class="min-vh-100 bg-light">
+    <main class="min-vh-100 bg-light" id="bandeiras">
 
         <%- body %>
 

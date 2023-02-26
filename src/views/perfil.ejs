@@ -6,9 +6,9 @@
         <section class="d-flex justify-content-center w-100">
             <div class="left ms-auto h-auto">
 
-                <img class="image" src="data:image/png;base64,<%= usuario.encode %>" />
+                <img class="image" src="data:image/png;base64,<%= user.encode %>" />
                 <h3 class="username text-center">
-                    <%= usuario.nome %>
+                    <%= user.nome %>
                 </h3>
                 <form action="/user/put/image/<%= id %>" accept="image/*" enctype="multipart/form-data" method="post">
 

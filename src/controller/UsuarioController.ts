@@ -9,7 +9,7 @@ class UsuarioController {
 
     public async registro(req:Request, res:Response) {
 
-        return res.render("registro", {padrao:false, login:false, erro:false, id:req.cookies["id"]})
+        return res.render("registro", {login:false, erro:false})
 
     }
 
@@ -31,22 +31,7 @@ class UsuarioController {
 
         }
         
-        if (req.cookies["id"]) {
-            try {
-                const id = await Security.decriptografar(req.cookies["id"]);
-                const e = await Usuario.listNameAndImgByID(Number(id));
-                let user = {
-                    nome: e?.nome as string,
-                    imagem: e?.encode as string,
-                };
-                return res.render("registro", {padrao:false, login:false, erro:"nome ja está sendo usado", id:req.cookies["id"], user:user})
-
-            } catch (error) {
-                console.error(error);
-                return res.render("registro", {padrao:false, login:false, erro:"nome ja está sendo usado", id:req.cookies["id"]})
-
-            }
-        }
+        return res.render("registro", {login:false, erro:"nome ja está sendo usado"})
 
     } 
 
@@ -56,14 +41,7 @@ class UsuarioController {
 
         const usuario = await Usuario.listByID(id)
 
-        const user = {
-
-            nome:usuario.nome,
-            imagem:usuario.encode
-
-        }
-
-        return res.render("perfil", {padrao:false, user, usuario, id:req.cookies["id"]})
+        return res.render("perfil", {usuario})
 
     }
 

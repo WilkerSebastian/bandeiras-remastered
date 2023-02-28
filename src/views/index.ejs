@@ -1,3 +1,18 @@
+<% if (error) { %>
+ 
+     <section class="position-sticky top-0">
+        <div class="alert alert-danger d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <div id="erro-msg">
+
+                <%= error %>
+    
+            </div>
+        </div>
+    </section>
+
+<% } %>
+
 <div class="container pt-5 pb-3">
 
     <%- include('./includes/inicio') %>
@@ -8,18 +23,6 @@
 
     <%- include('./includes/sobre') %>
 
-    <section class="">
-
-        <div id="seeder-comentario">
-
-
-
-
-        </div>
-        <div id="comentarios">
-
-        </div>
-
-    </section>
+    <%- include('./includes/comentarios') %>
 
 </div>

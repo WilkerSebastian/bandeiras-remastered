@@ -132,6 +132,14 @@ class Usuario {
 
   }
 
+  public static async isAtive(id:number) {
+
+    const ativo = await db.query(`SELECT ativo FROM Usuario WHERE id = $1`,[id])
+
+    return ativo.rows[0].ativo as boolean
+
+  } 
+
   public static async isUserAvaliable(user:Usuario) {
 
     const usuarios = await db.query(`SELECT id,senha_hash FROM Usuario WHERE email = $1`, [user.email])

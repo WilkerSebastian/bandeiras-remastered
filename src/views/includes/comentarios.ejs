@@ -1,0 +1,71 @@
+<section id="comentarios" class="my-5">
+
+  <h1 class="text-pink-light w-75 mx-auto mt-1">Cometarios</h1>
+
+  <div id="seeder-comentario">
+
+    <% if (user) { %>
+
+    <form action="/comentario/send" class="my-3 p-3 w-100" method="post">
+
+      <div class="form-floating">
+        <textarea class="form-control" required placeholder="Escreva um comentario" name="texto" id="texto" style="height: 100px"></textarea>
+        <label for="texto">Comentario</label>
+      </div>
+      <button type="submit" class="btn btn-primary my-3">Enviar</button>
+
+    </form>
+
+    <% } else {%>
+
+    <span>Precisa realizar o login para enviar comentarios</span>
+
+    <% } %>
+
+  </div>
+  <div class="comentarios">
+
+    <% if (comentarios.length) { %>
+
+    <% comentarios.forEach(comentario => { %>
+
+    <div class="comentario">
+
+      <div class="header-comentario">
+
+        <div class="d-flex">
+          <img class="rounded-circle img-perfil" src="data:image/png;base64,<%= comentario.imagem.toString("base64") %>">
+          <h3 class="ms-2"> <%= comentario.nome %> </h3>
+          
+          <% if (comentario.id_user == id) { %>
+          
+            <a href="/comentario/deletar/<%= comentario.id %>" class="ms-auto mt-2 me-3">
+                <img src="/public/img/lixeira.png"  class="img-perfil">
+            </a>
+
+          <% } %>
+          
+        </div>
+
+        <p><%= new Date(comentario.data_pub).toLocaleString() %></p>
+
+      </div>
+      <div class="conteudo-comentario">
+
+        <p class="ms-3 mb-0"><%= comentario.texto %></p>
+
+      </div>
+
+    </div>
+
+    <% }) %>
+
+    <% } else {%>
+
+    <span class="text-light">Sem cometarios registrados!</span>
+
+    <% } %>
+
+  </div>
+
+</section>

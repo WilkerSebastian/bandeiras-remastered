@@ -7,6 +7,7 @@ export async function sessionSettings(req:Request , res:Response , next:NextFunc
     res.header('HttpOnly', 'true');
 
     res.locals.navbar = false
+    res.locals.error = false
     res.locals.id = req.cookies["id"]
     
     if (req.cookies["id"]) {

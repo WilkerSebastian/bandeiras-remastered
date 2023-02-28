@@ -4,6 +4,7 @@ import UsuarioController from "./controller/UsuarioController";
 import EmailController from "./controller/EmailController";
 import AdminController from "./controller/AdminController";
 import upload from "./assets/upload";
+import ComentarioController from "./controller/ComentarioController";
 
 const router = Router();
 
@@ -20,9 +21,12 @@ router.post("/user/save", UsuarioController.saveUser)
 router.post("/user/put/image/:id", upload.single("imagem") , UsuarioController.put)
 router.post("/user/update/:id", UsuarioController.update)
 
+router.get("/comentario/deletar/:id", ComentarioController.deletar);
+router.post("/comentario/send", ComentarioController.sendComment);
+
 router.get("/email/show/:email", EmailController.show)
  
 router.get("/admin/list/user/:admin", AdminController.viewUsers)
 router.get("/admin/delete/user/:admin/:id", AdminController.deletar)
 
-export default router
+export default router 

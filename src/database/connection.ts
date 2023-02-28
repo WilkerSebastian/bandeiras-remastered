@@ -1,18 +1,23 @@
 import {Pool, PoolConfig} from "pg"
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 function databaseConfig(node:string) { 
 
     let config:PoolConfig
-
+    
     if (node == "production") {
         
         config = {
 
             connectionString: process.env.URL,
-            ssl: false
+            ssl:{
+                rejectUnauthorized:false,
+                requestCert: true
+            }
 
         }
-
+        
     } else {
 
         config = {

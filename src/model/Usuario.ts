@@ -140,17 +140,11 @@ class Usuario {
 
   } 
 
-  public static async isUserAvaliable(user:Usuario) {
+  public static async getUserByEmail(user:Usuario) {
 
     const usuarios = await db.query(`SELECT id,senha_hash FROM Usuario WHERE email = $1`, [user.email])
 
-    const user_filtro = usuarios.rows.filter(async(u) => {
-
-      return bcrypt.compare(u.senha_hash, await bcrypt.hash(user.senha, await bcrypt.genSalt(10)))
-
-    })
-
-    return user_filtro[0]
+    return usuarios.rows[0]
 
   }
 

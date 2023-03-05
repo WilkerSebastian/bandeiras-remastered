@@ -2,6 +2,7 @@ import {Request, Response} from "express"
 import Usuario from "../model/Usuario"
 import Security from "../assets/Security"
 import EmailManeger from "../assets/EmailManeger"
+import { compare } from "bcryptjs"
 import {readFileSync, unlinkSync} from "fs"
 import { resolve } from "path"
 
@@ -43,13 +44,13 @@ class UsuarioController {
 
     public async actionLogin(req:Request, res:Response) {
 
-        let user = await Usuario.create(req.body)
+        const user = await Usuario.create(req.body)
 
-        user = await Usuario.isUserAvaliable(user)
+        const newUser = await Usuario.getUserByEmail(user)
 
-        if (user) {
+        if (await compare(req.body.senha, newUser.senha_hash)) {
 
-            res.cookie("id", await Security.criptografar(user.id.toString()))
+            res.cookie("id", await Security.criptografar(newUser.id.toString()))
 
             return res.redirect("/")
             

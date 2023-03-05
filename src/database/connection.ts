@@ -23,7 +23,7 @@ function databaseConfig(node:string) {
         config = {
 
             host: "localhost",
-            user: "postgres",
+            user: "dev",
             database: "bandeira",
             password: "postgres",
             port: 5432

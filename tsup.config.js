@@ -8,9 +8,12 @@ module.exports = defineConfig({
     ignoreWatch: ["src/databse/sql/*.sql"],
     entry: ['src/'],
     loader: {
+    '.png': 'copy',
+    '.webp': 'copy',
+    '.jpg': 'copy',
     '.ejs': 'copy',
     '.sql': 'copy',
     '.ico': 'copy',
-    ".env": 'copy'
+    '.env': 'copy'
     }
   })
